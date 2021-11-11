@@ -1,0 +1,17 @@
+{
+  "name": "backenddoatec",
+  "version": "1.0.0",
+  "description": "Backend do prototipo de projeto DOATEC",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js"
+  },
+  "author": "Matheus Schreiber",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.95.14",
+    "nodemon": "^2.0.15",
+    "sqlite3": "^5.0.2"
+  }
+}
