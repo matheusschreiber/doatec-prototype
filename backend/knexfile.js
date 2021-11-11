@@ -5,15 +5,15 @@ module.exports = {
   development: {
     client: 'sqlite3',
     connection: {
-      filename: './src/database/bancodedados.sqlite3'
+      filename: './src/database/bancodedados.sqlite'
     },
-    migrations:{
+    migrations: {
       directory: './src/database/migrations'
     },
     useNullAsDefault: true
   },
 
-  development: {
+  staging: {
     client: 'postgresql',
     connection: {
       database: 'my_db',
