@@ -8,7 +8,6 @@ exports.up = function(knex) {
     table.integer('quantidade_total').notNullable();
     table.integer('quantidade_doada').notNullable();
     table.boolean('completo').notNullable();
-    table.boolean('doadores').notNullable();
   })
 };
 

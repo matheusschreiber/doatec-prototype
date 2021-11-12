@@ -21,8 +21,7 @@ module.exports = {
       item,
       quantidade_total,
       quantidade_doada: 0,
-      completo: false,
-      doadores: []
+      completo: false
     })
 
     return response.json( {message: "Criado com sucesso!"} )    
@@ -105,13 +104,12 @@ module.exports = {
     const {page=1} = request.query
     const id_comunidade = request.headers.authorization;
     let pedidos = []
-    console.log(id_comunidade)
     if (id_comunidade){
       pedidos = await connection('pedidos')
         .where('comunidade', id_comunidade)
         .limit(5)
         .offset((page-1)*5)
-        .select('*')
+        .select('pedidos.*')
         .join('comunidades', 'comunidades.id', 'pedidos.comunidade')
         .select([
           "comunidades.nome",
@@ -122,7 +120,7 @@ module.exports = {
         ])
     } else {
       pedidos = await connection('pedidos')
-      .join('comunidades')
+      .join('comunidades', 'comunidades.id', 'pedidos.comunidade')
       .limit(5)
       .offset((page-1) * 5)
       .select([

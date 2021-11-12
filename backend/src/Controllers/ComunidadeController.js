@@ -31,5 +31,9 @@ module.exports = {
       return response.status(401).json({message: 'Senha/Nome incorreta(o)'})  
     }
     return response.status(401).json({message: 'Senha/Nome incorreta(o)'})
+  },
+  async listaComunidade(request, response){
+    const comunidades = await connection('comunidades').select('*')
+    return response.json(comunidades)
   }
 }

@@ -13,5 +13,6 @@ router.get('/doadores/:id', PedidoController.listaDoadores)
 
 router.post('/comunidade', ComunidadeController.cadastrarComunidade);
 router.post('/login', ComunidadeController.logarComunidade);
+router.get('/comunidade', ComunidadeController.listaComunidade)
 
 module.exports = router;
