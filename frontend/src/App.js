@@ -1,6 +1,6 @@
 import React from 'react'
-import './global.css'
 import RouterComponent from './routes'
+import './global.css'
 
 function App() {
   return (

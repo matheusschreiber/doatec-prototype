@@ -1,0 +1,81 @@
+.login-container{
+  width: 1200px;
+  height: 500px;
+  margin: 50px auto;
+
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+}
+
+.login-container img{
+  height: 90%;
+}
+
+.form-container {
+  width: 400px;
+  height: 100%;
+  margin-top: 300px;
+}
+
+.form-container form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container input{
+  height: 60px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 0px;
+  padding: 20px;
+  font-size: 12pt;
+}
+
+.form-container .button-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-container .button-group button {
+  width: 48%;
+  height: 60px;
+  margin-top: 10px;
+  border: 0px;
+  background-color: var(--laranja);
+  border-radius: 8px;
+  font-size: 14pt;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-container h1{
+  line-height: 20pt;
+  font-family: 'Roboto', sans-serif;
+  font-size: 30pt;
+
+  color: var(--cinza-escuro)
+}
+
+.form-container strong{
+  color: var(--laranja)
+}
+
+.relate-problem {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.relate-problem h2{
+  font-size: 12pt;
+  color: var(--cinza-claro);
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+
+
