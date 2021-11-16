@@ -18,4 +18,28 @@ body {
   --cinza-escuro: #4D4B4B;
   --cinza-claro: #B7B4B4;
   --laranja: #FDC166;
+  --laranja-escuro: #FFE9CE;
+}
+
+.button {
+  width: 48%;
+  height: 60px;
+  margin-top: 10px;
+  border: 0px;
+  background-color: var(--laranja);
+  border-radius: 8px;
+  font-size: 14pt;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-button {
+  color: var(--laranja);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

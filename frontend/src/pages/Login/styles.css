@@ -39,19 +39,6 @@
   justify-content: space-between;
 }
 
-.form-container .button-group button {
-  width: 48%;
-  height: 60px;
-  margin-top: 10px;
-  border: 0px;
-  background-color: var(--laranja);
-  border-radius: 8px;
-  font-size: 14pt;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
 .form-container h1{
   line-height: 20pt;
   font-family: 'Roboto', sans-serif;

@@ -16,8 +16,8 @@ function Login(){
           <input placeholder="Nome da comunidade"/>
           <input placeholder="Senha"/>
           <div className="button-group">
-            <button type="submit" onClick={console.log("login")}>Logar</button>
-            <button>Cadastrar</button>
+            <button className="button" type="submit">Logar</button>
+            <button className="button">Cadastrar</button>
           </div>
         </form>
 
