@@ -3,10 +3,14 @@ import './index.css';
 import { Divider } from 'antd';
 import 'antd/dist/antd.css';
 import { FiArrowDown } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 
 import logoGrande from '../../assets/logo-grande.png';
 
 function StartScreen() {
+  const nav = useNavigate();
+  
+  
   return (
     <div className="container">
      <img src={logoGrande} alt="DOATEC logo"/>
@@ -22,11 +26,9 @@ function StartScreen() {
           </div>      
         </div>
         
-    <a href="/">
-     <div className="next-arrow">
+     <div className="next-arrow" onClick={() => nav('/login')}>
       <FiArrowDown size={30} />
      </div>
-    </a>
     </div>
   );
 }

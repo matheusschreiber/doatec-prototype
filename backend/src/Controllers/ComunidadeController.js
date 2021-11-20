@@ -21,11 +21,14 @@ module.exports = {
   async logarComunidade(request, response){
     const { nome, senha_log } = request.body;
     try {
-      const [{senha}] = await connection('comunidades').where('nome', nome).select(['senha']);
+      const [{senha, id}] = await connection('comunidades').where('nome', nome).select(['id','senha']);
       const hash = createHash('sha256');
       hash.update(senha_log);
       if (senha == hash.digest('hex')) {
-        return response.status(202).json({message: "Logado com sucesso!"})
+        return response.status(202).json({
+          message: "Logado com sucesso!",
+          id_comu: id
+        })
       }
     } catch (err) {
       return response.status(401).json({message: 'Senha/Nome incorreta(o)'})  
@@ -33,7 +36,13 @@ module.exports = {
     return response.status(401).json({message: 'Senha/Nome incorreta(o)'})
   },
   async listaComunidade(request, response){
-    const comunidades = await connection('comunidades').select('*')
-    return response.json(comunidades)
+    const id = request.headers.authorization;
+    try {
+      const [comunidades] = await connection('comunidades').where('id', id).select('*')
+      if (!comunidades) return response.status(401).json({message: "Faça login novamente"})
+      return response.json(comunidades)
+    } catch (err) {
+      return response.status(401).json({message: "Faça login novamente"})
+    }
   }
 }

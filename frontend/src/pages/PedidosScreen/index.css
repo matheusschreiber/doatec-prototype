@@ -18,6 +18,7 @@ body {
   border: 2px solid var(--laranja);
   border-radius: 8px;
   display: flex;
+  cursor: pointer;
 }
 
 .comu-image{
@@ -61,6 +62,7 @@ body {
 
 .pedido-content{
   display: flex;
+  width: 100%;
 }
 
 .pedido-item{
@@ -77,6 +79,7 @@ body {
   display: flex;
   position: relative;
   left: 180px;
+  width: 120px;
   font-size: 10pt;
 }
 
@@ -87,7 +90,6 @@ body {
   border-radius: 8px;
 
   cursor: pointer;
-  padding-top: 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,4 +108,78 @@ body {
   margin-left: 5px;
   cursor: pointer;
   color: var(--cinza-claro);
+}
+
+.first-padrao{
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.header-add-pedido{
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 20px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.inner-pedido {
+  width: 350px;
+  height: 210px;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inner-pedido strong{
+  color: var(--cinza-escuro);
+}
+
+.inner-pedido form{
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  height: 300px;
+  padding-bottom: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inner-pedido form input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--cinza-claro);
+}
+
+.back-button-gray {
+  color: var(--cinza-claro);
+  cursor: pointer;
+}
+
+#minor-button {
+  width: 38%;
+  height: 40px;
+  background-color: var(--cinza-claro);
+  font-size: 10pt;
+  color: white;
+}
+
+.text-section {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+#del-button{
+  width: 31%;
+  height: 40px;
+  font-size: 10pt;
+  background-color: var(--vermelho);
 }

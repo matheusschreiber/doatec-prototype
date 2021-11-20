@@ -19,6 +19,7 @@ body {
   --cinza-claro: #B7B4B4;
   --laranja: #FDC166;
   --laranja-escuro: #FFE9CE;
+  --vermelho: #FA9696;
 }
 
 .button {
@@ -32,6 +33,12 @@ body {
   color: white;
   font-weight: bold;
   cursor: pointer;
+  transition: .5s;
+}
+
+.button:hover {
+  transition: .5s;
+  opacity: .5;
 }
 
 .back-button {

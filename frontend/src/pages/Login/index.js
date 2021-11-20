@@ -1,10 +1,29 @@
-import React from 'react';
-import './styles.css';
-import { FiInfo } from 'react-icons/fi';
-
 import frontImage from '../../assets/front.png';
+import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { FiInfo } from 'react-icons/fi';
+import app from '../../services/app';
+import './styles.css';
 
 function Login(){
+  const [ comunidade, setComunidade ] = useState();
+  const [ senha, setSenha ] = useState();
+  const nav = useNavigate();
+
+  async function handleLogin(e){
+    e.preventDefault();
+    try {
+      const response = await app.post('/login', {
+        nome: comunidade,
+        senha_log: senha
+      })
+      localStorage.setItem('comunidadeID', response.data.id_comu)
+      nav('/pedidosc')
+    } catch (err) {
+      alert("Problema no login")
+    }
+  }
+  
   return(
     <div className="login-container">
       <img src={frontImage} alt="donation illustration" />
@@ -12,12 +31,15 @@ function Login(){
         <h1>Olá <strong>comunidade</strong>!</h1>
         <h1>Faça seu login abaixo</h1>
         
-        <form>
-          <input placeholder="Nome da comunidade"/>
-          <input placeholder="Senha"/>
+        <form onSubmit={handleLogin}>
+          <input placeholder="Nome da comunidade"
+            onChange={(e)=>{setComunidade(e.target.value)}}/>
+          <input placeholder="Senha"
+            type="password"
+            onChange={(e)=>{setSenha(e.target.value)}}/>
           <div className="button-group">
             <button className="button" type="submit">Logar</button>
-            <button className="button">Cadastrar</button>
+            <button className="button" onClick={() => nav('/comunidade')}>Cadastrar</button>
           </div>
         </form>
 
