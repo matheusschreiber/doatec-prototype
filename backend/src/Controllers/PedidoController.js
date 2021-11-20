@@ -7,24 +7,23 @@ const date = knex.fn.now();
 
 module.exports = {
   async createPedido(request, response){
-    const { 
-      item,
-      quantidade_total,
-    } = request.body;
-
+    const { item, quantidade_total } = request.body;
     const comunidade = request.headers.authorization
 
-    await connection('pedidos').insert({
-      id: crypto.randomBytes(5).toString('HEX'),
-      comunidade,
-      data: date,
-      item,
-      quantidade_total,
+    const generatedID = crypto.randomBytes(5).toString('HEX')
+
+    const pedido = {
+      id: generatedID,
+      comunidade: comunidade,
+      item: item,
+      quantidade_total: quantidade_total,
       quantidade_doada: 0,
       completo: false
-    })
-
-    return response.json( {message: "Criado com sucesso!"} )    
+    }
+    await connection('pedidos').insert(pedido);
+    const [{data}] = await connection('pedidos').where('id', generatedID).select('data')
+    pedido['data'] = data
+    return await response.json(pedido)    
   },
 
   async realizaDoacao(request, response){
@@ -95,9 +94,14 @@ module.exports = {
 
   async deletaPedido(request, response){
     const { id } = request.params;
-    const pedido = await connection('pedidos').where('id', id).del();
-    if (!pedido) return response.status(404).json({error: "Pedido não encontrado"})
-    return response.json({message: "Apagado com sucesso!"})
+    const id_comunidade = request.headers.authorization;
+    try{
+      const pedido = await connection('pedidos').where({'id': id, 'comunidade': id_comunidade}).del();
+      if (!pedido) return response.status(404).json({error: "Pedido não encontrado"})
+      return response.json({message: "Apagado com sucesso!"})
+    } catch (err) {
+      return response.status(401).json({message: "Comunidade não autorizada"})
+    }
   },
 
   async listaPedido(request, response){
@@ -107,8 +111,8 @@ module.exports = {
     if (id_comunidade){
       pedidos = await connection('pedidos')
         .where('comunidade', id_comunidade)
-        .limit(5)
-        .offset((page-1)*5)
+        // .limit(5)
+        // .offset((page-1)*5)
         .select('pedidos.*')
         .join('comunidades', 'comunidades.id', 'pedidos.comunidade')
         .select([

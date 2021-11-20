@@ -38,6 +38,10 @@ module.exports = {
   async listaComunidade(request, response){
     const id = request.headers.authorization;
     try {
+      if (id==="admin") {
+        const comunidades = await connection('comunidades').select('*')        
+        return response.json(comunidades)
+      }
       const [comunidades] = await connection('comunidades').where('id', id).select('*')
       if (!comunidades) return response.status(401).json({message: "Faça login novamente"})
       return response.json(comunidades)

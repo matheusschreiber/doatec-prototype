@@ -14,6 +14,9 @@ export default function PedidosScreen(){
   const [ update, setUpdate ] = useState();
   const [ foto, setFoto ] = useState();
 
+  const [ nomePedido, setNomePedido ] = useState();
+  const [ quantidade, setQuantidade ] = useState();
+
   const id_comu = localStorage.getItem('comunidadeID')
   
   useEffect(()=>{
@@ -21,7 +24,13 @@ export default function PedidosScreen(){
       headers: {
         authorization: id_comu
       }
-    }).then((response)=>{setPedidos(response.data)})
+    }).then((response)=>{
+      let provisorio = response.data
+      provisorio.map((p)=>{
+        p['visible'] = true
+      })
+      setPedidos(provisorio)
+    })
 
     app.get('/comunidade', {
       headers: {
@@ -54,6 +63,41 @@ export default function PedidosScreen(){
       setPedidos(v)
       if (update) setUpdate(false); else setUpdate(true);
     }
+  }
+  
+  async function adicionarPedido(e){
+    e.preventDefault();
+    let headerAxios = {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: id_comu
+      }
+    }
+
+    const response = await app.post('/pedido', {
+      item: nomePedido,
+      quantidade_total: quantidade   
+    }, headerAxios)
+
+    let a = pedidos.slice()
+    let prov = response.data
+    prov['visible'] = true
+    a.push(prov)
+    setPedidos(a)
+  }
+
+  async function deletarPedido(id) {
+    await app.delete(`/pedido/${id}`, {
+      headers: {
+        authorization: id_comu
+      }
+    })
+    let a = pedidos.slice()
+    a.map((i)=>{
+      if (i.id == id) a.splice(a.indexOf(i), 1)
+    })
+    setPedidos(a)
+    
   }
 
   return(
@@ -91,11 +135,14 @@ export default function PedidosScreen(){
                   onClick={switchPedido}/>
                 <strong>ADICIONAR</strong>
               </div>
-              <form>
-                <input placeholder="Nome do item"/> 
-                <input placeholder="Quantidade"/>
+              <form onSubmit={adicionarPedido}>
+                <input placeholder="Nome do item"
+                  onChange={(e)=>setNomePedido(e.target.value)}/> 
+                <input placeholder="Quantidade"
+                  onChange={(e)=>setQuantidade(parseInt(e.target.value))}/>
                 <button className="button"
-                  id="minor-button">CONFIRMAR</button>
+                  id="minor-button"
+                  type="submit">CONFIRMAR</button>
               </form>
             </div>
 
@@ -112,15 +159,17 @@ export default function PedidosScreen(){
                     <strong>EXCLUIR</strong>
                   </div>
                   <div className="text-section">
-                    <p>Monitor</p>
-                    <p>10 UN.</p>
+                    <p>{i.item}</p>
+                    <p>{`${i.quantidade_total} UN.`}</p>
                   </div>
-                  <button className="button" id="del-button">CONFIRMAR</button>
+                  <button className="button"
+                    id="del-button"
+                    onClick={() => deletarPedido(i.id)}>CONFIRMAR</button>
                 </div>
 
                 <div className="pedido" style={i.visible?{}:{display:"none"}}>
                   <div className="pedido-uptop">
-                    <p>Adquirido <strong>5/10</strong></p>
+                    <p>Adquirido <strong>{`${i.quantidade_doada}/${i.quantidade_total}`}</strong></p>
                     <FiTrash2 size={20} 
                       className="trash-button"
                       onClick={()=>switchDeletaPedido(pedidos.indexOf(i))} />
@@ -128,15 +177,15 @@ export default function PedidosScreen(){
                   <div className="pedido-content">
                     <div className="pedido-item">
                       <h2>ITEM</h2>
-                      <p>Monitor</p>
+                      <p>{i.item}</p>
                       <h2>QUANTIDADE</h2>
-                      <p>10</p>
+                      <p>{i.quantidade_total}</p>
                     </div>
                     <div className="pedido-item">
                       <h2>ID DO PEDIDO</h2>
-                      <p>#ABC123456</p>
+                      <p>{i.id}</p>
                       <h2>DATA DO PEDIDO</h2>
-                      <p>11/11/2021</p>
+                      <p>{i.data}</p>
                     </div>
                   </div>
                 </div>
