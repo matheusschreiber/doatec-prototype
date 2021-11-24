@@ -98,6 +98,7 @@ module.exports = {
     try{
       const pedido = await connection('pedidos').where({'id': id, 'comunidade': id_comunidade}).del();
       if (!pedido) return response.status(404).json({error: "Pedido não encontrado"})
+      await connection('doadores').where('id_pedido', id).del();
       return response.json({message: "Apagado com sucesso!"})
     } catch (err) {
       return response.status(401).json({message: "Comunidade não autorizada"})
