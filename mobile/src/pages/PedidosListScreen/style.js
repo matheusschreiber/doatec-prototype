@@ -65,5 +65,16 @@ export default StyleSheet.create({
   pedidoMetaInner:{
     height:"100%",
     backgroundColor: "#FDC166"
+  },
+  inputSearch:{
+    backgroundColor: "white",
+    color: '#4D4B4B',
+    width: "70%",
+    height: 50,
+    alignItems: 'center',
+    paddingLeft: 20,
+    borderRadius: 8,
+    fontSize: 20,
+    marginBottom: 10
   }
 })

@@ -82,7 +82,8 @@ export default StyleSheet.create({
     borderWidth: 3,
     borderColor: "#FDC166",
     borderRadius: 8,
-    marginBottom: 10
+    marginBottom: 10,
+    resizeMode: 'contain'
   },
   botaoDoar:{
     marginTop: 20,

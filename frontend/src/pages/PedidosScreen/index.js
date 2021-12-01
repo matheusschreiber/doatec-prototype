@@ -6,7 +6,6 @@ import app from '../../services/app'
 import './index.css'
 
 export default function PedidosScreen(){
-  // let link = "https://secri.org.br/wp-content/uploads/A4_0033_19_LG_H-01-1024x673.png";
   const nav = useNavigate();
   
   const [ pedidos, setPedidos ] = useState([]);
@@ -83,6 +82,9 @@ export default function PedidosScreen(){
     prov['doadores'] = [{}]
     a.push(prov)
     setPedidos(a)
+    setAdicionando(false)
+    
+    document.getElementById("form").reset();
   }
 
   async function deletarPedido(id) {
@@ -139,7 +141,7 @@ export default function PedidosScreen(){
                   onClick={switchPedido}/>
                 <strong>ADICIONAR</strong>
               </div>
-              <form onSubmit={adicionarPedido}>
+              <form onSubmit={adicionarPedido} id="form">
                 <input placeholder="Nome do item"
                   onChange={(e)=>setNomePedido(e.target.value)}/> 
                 <input placeholder="Quantidade"

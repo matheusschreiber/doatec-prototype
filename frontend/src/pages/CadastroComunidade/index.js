@@ -30,7 +30,8 @@ export default function CadastroComunidade(){
         foto
       }).catch((erro)=>alert(erro))
       localStorage.setItem('comunidadeID', response.data.id_comu)
-      nav('/pedidosc')
+      alert('Cadastrado com sucesso!')
+      nav('/login')
     } catch (err) {
       alert(err)
     }

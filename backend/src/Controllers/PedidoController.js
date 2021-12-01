@@ -86,8 +86,8 @@ module.exports = {
   },
 
   async procuraPedido(request, response){
-    const { id } = request.params;
-    const [pedido] = await connection('pedidos').where('id', id).select('*')
+    const { nomeDoItem } = request.params;
+    const [pedido] = await connection('pedidos').where('item', nomeDoItem).select('*')
     if (!pedido) return response.status(404).json({error: "Pedido não encontrado"})
     return response.json(pedido);
   },
