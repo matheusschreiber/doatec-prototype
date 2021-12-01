@@ -5,9 +5,7 @@
 ## Descrição
 Um protótipo de aplicativo de doação de materiais eletronicos para comunidades e ONGS. 
 
-```
 Vale lembrar que o presente projeto é apenas um 'mock-up' de uma ideia, sem focar em fins lucrativos no momento.
-```
 
 ## Funcionamento
 
